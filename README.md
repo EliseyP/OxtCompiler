@@ -1,2 +1,25 @@
 # OxtCompiler
 Oxt compiler from Bernard Marcelly fixed for LibreOffice ver > 6
+
+ott-файл шаблона с заготовками для сборки расширения.    
+
+После версии LibreOffice > 6 cборка расширения стала завершаться аварийно.   
+Возможная причина:  
+
+при запуске `Compile2LibO()` значение `FsetHelp` оказывалось по модулю верное, но **отрицательное**.
+
+Соответственно в функции `M1a.beginDescription()` код:
+   
+`setAllowed(InstrFlags, FsetTooltip +FsetExtensionDescription +FsetLicense _
+    +FsetHelp +FsetIcon +FsetPlatform _
+    +FsetDisplayName +FsetPublisherName +FsetReleaseNotes)
+`
+заменен на: 
+
+`setAllowed(InstrFlags, FsetTooltip +FsetExtensionDescription +FsetLicense _
+    +ABS(FsetHelp) +FsetIcon +FsetPlatform _
+    +FsetDisplayName +FsetPublisherName +FsetReleaseNotes)
+`
+
+#### Проблемы:  
+Если Basic библиотека была экспортирована и используется в раширении, то если при установке эта же библиотека остается зарегистрированной в Office, то расширение скорее всего не установится (для установки - удалить библиотеку).
