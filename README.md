@@ -10,16 +10,16 @@ ott-файл шаблона с заготовками для сборки рас
 
 Соответственно в функции `M1a.beginDescription()` код:
    
-`setAllowed(InstrFlags, FsetTooltip +FsetExtensionDescription +FsetLicense _
-    +FsetHelp +FsetIcon +FsetPlatform _
+`setAllowed(InstrFlags, FsetTooltip +FsetExtensionDescription +FsetLicense _  
+    +FsetHelp +FsetIcon +FsetPlatform _  
     +FsetDisplayName +FsetPublisherName +FsetReleaseNotes)
 `
 заменен на: 
 
-`setAllowed(InstrFlags, FsetTooltip +FsetExtensionDescription +FsetLicense _
-    +ABS(FsetHelp) +FsetIcon +FsetPlatform _
+`setAllowed(InstrFlags, FsetTooltip +FsetExtensionDescription +FsetLicense _  
+    +ABS(FsetHelp) +FsetIcon +FsetPlatform _  
     +FsetDisplayName +FsetPublisherName +FsetReleaseNotes)
 `
 
 #### Проблемы:  
-Если Basic библиотека была экспортирована и используется в раширении, то если при установке эта же библиотека остается зарегистрированной в Office, то расширение скорее всего не установится (для установки - удалить библиотеку).
+Если Basic библиотека была экспортирована и используется при создании раширения, то если при установке эта же библиотека остается зарегистрированной в Office, расширение скорее всего не установится (для установки - удалить библиотеку).
